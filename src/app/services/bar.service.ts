@@ -13,4 +13,8 @@ export class BarService {
   getBars(): Observable<Bar[]> {
     return this.http.get<Bar[]>('http://localhost:3000/bars');
   }
+
+  getBarById(id: number): Observable<Bar> {
+    return this.http.get<Bar>(`http://localhost:3000/bars/${id}`);
+  }
 }
