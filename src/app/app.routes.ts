@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CommandPageComponent } from './command-page/command-page.component';
 
 export const routes: Routes = [
   {
@@ -7,7 +8,7 @@ export const routes: Routes = [
     component: LandingPageComponent,
   },
   {
-    path: 'bar/:id',
-    component: LandingPageComponent,
+    path: 'command/:id',
+    component: CommandPageComponent,
   },
 ];
