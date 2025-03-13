@@ -1,0 +1,4 @@
+<div *ngFor="let bar of bars" cal>
+  <p>{{ bar.nom }}</p>
+  <button [routerLink]="['bar/', bar.id]">voir +</button>
+</div>
