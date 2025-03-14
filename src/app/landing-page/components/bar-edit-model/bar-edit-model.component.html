@@ -1,0 +1,36 @@
+<p-dialog
+  header="Modifier le Bar"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '30rem' }"
+  (onHide)="cancel()"
+>
+  <div class="p-fluid ya" *ngIf="bar">
+    <div class="p-field yo">
+      <label for="nom">Nom</label>
+      <input id="nom" type="text" [(ngModel)]="bar.nom" />
+    </div>
+    <div class="p-field yo">
+      <label for="adresse">Adresse</label>
+      <input id="adresse" type="text" [(ngModel)]="bar.adresse" />
+    </div>
+    <div class="p-field yo">
+      <label for="tel">Tel</label>
+      <input id="tel" type="text" [(ngModel)]="bar.tel" />
+    </div>
+    <div class="p-field yo">
+      <label for="email">Email</label>
+      <input id="email" type="text" [(ngModel)]="bar.email" />
+    </div>
+    <div class="p-field yo">
+      <label for="description">Description</label>
+      <textarea id="description" [(ngModel)]="bar.description"></textarea>
+    </div>
+  </div>
+
+  <div class="btn-modal">
+    <p-button label="Annuler" severity="secondary" (click)="cancel()" />
+    <p-button label="Enregistrer" (click)="saveBar()" />
+    <p-button label="Supprimer" severity="danger" (click)="deleteBar()" />
+  </div>
+</p-dialog>

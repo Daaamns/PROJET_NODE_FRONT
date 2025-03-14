@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Bar } from '../../../models/types/Bar';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -13,4 +13,5 @@ import { RouterLink } from '@angular/router';
 })
 export class CardComponent {
   @Input() bars!: Bar;
+  @Output() edit = new EventEmitter<number>();
 }

@@ -66,7 +66,6 @@ export class CommandPageComponent {
   }
 
   saveCommande() {
-    const currentStatus = this.selectedCommande.status;
     if (
       typeof this.selectedCommande.status === 'object' &&
       'value' in this.selectedCommande.status
