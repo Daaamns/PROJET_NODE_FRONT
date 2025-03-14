@@ -2,7 +2,7 @@ export type Bar = {
   id: number;
   nom: string;
   adresse: string;
-  tel: string;
+  tel: number;
   email: string;
   description: string;
 };

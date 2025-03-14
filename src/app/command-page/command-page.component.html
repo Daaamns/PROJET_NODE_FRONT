@@ -1,1 +1,108 @@
-<p>command-page works!</p>
+<div>
+  <div class="band">
+    <img
+      src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmFyfGVufDB8fDB8fHww"
+      alt=""
+    />
+  </div>
+
+  <div *ngIf="bar">
+    <h2>{{ bar.nom }}</h2>
+
+    <div>
+      <div class="contact">
+        <p>{{ bar.email }}</p>
+        -
+        <p>{{ bar.tel }}</p>
+      </div>
+
+      <div class="desc">
+        <p>{{ bar.description }}</p>
+        <p>{{ bar.adresse }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="commandes" class="command-table">
+    <p-table [value]="commandes" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+        <tr>
+          <th>ID</th>
+          <th>Prix</th>
+          <th>Date</th>
+          <th>Statut</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-commande>
+        <tr>
+          <td>{{ commande.id }}</td>
+          <td>{{ commande.prix | currency : "EUR" }}</td>
+          <td>{{ commande.date | date : "dd/MM/yyyy" }}</td>
+          <td>{{ commande.status }}</td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              label="Modifier"
+              (click)="openEditDialog(commande)"
+            />
+          </td>
+          <td>
+            <p-button
+              icon="pi pi-trash"
+              label="Supprimer"
+              severity="danger"
+              (click)="openDeleteDialog(commande)"
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog
+  header="Modifier la commande"
+  [modal]="true"
+  [(visible)]="visibleEdit"
+  [style]="{ width: '30rem', minHeight: '12rem' }"
+>
+  <div class="select-btn" *ngIf="selectedCommande">
+    <label for="status" class="font-semibold w-24">Statut</label>
+    <p-selectButton
+      [options]="[
+        { label: 'Brouillon', value: 'Brouillon' },
+        { label: 'En cours', value: 'En cours' },
+        { label: 'Terminé', value: 'Terminé' }
+      ]"
+      [(ngModel)]="selectedCommande.status"
+      optionLabel="label"
+      [style]="{ width: '100%' }"
+    ></p-selectButton>
+  </div>
+
+  <div class="flex justify-end gap-2">
+    <p-button
+      label="Annuler"
+      severity="secondary"
+      (click)="visibleEdit = false"
+    />
+    <p-button label="Enregistrer" (click)="saveCommande()" />
+  </div>
+</p-dialog>
+
+<p-dialog
+  header="Supprimer la commande"
+  [modal]="true"
+  [(visible)]="visibleDelete"
+  [style]="{ width: '25rem' }"
+>
+  <p>Êtes-vous sûr de vouloir supprimer cette commande ?</p>
+  <div class="flex justify-end gap-2 mt-4">
+    <p-button
+      label="Non"
+      severity="secondary"
+      (click)="visibleDelete = false"
+    />
+    <p-button label="Oui" severity="danger" (click)="deleteCommande()" />
+  </div>
+</p-dialog>
