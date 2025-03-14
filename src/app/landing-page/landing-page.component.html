@@ -1,3 +1,30 @@
-<div class="bar-container">
-  <app-card *ngFor="let bar of bars" [bars]="bar"></app-card>
+<div class="add-bar-btn">
+  <p-button
+    class="btn-"
+    label="Ajouter un Bar"
+    severity="secondary"
+    (click)="addBar()"
+  />
 </div>
+
+<app-bar-add-model
+  [visible]="visibleAdd"
+  (close)="visibleAdd = false"
+  (barAdded)="onBarAdded($event)"
+></app-bar-add-model>
+
+<div class="bar-container">
+  <app-card
+    *ngFor="let bar of bars"
+    [bars]="bar"
+    (edit)="editBar(bar.id)"
+  ></app-card>
+</div>
+
+<app-bar-edit-model
+  [visible]="visibleEdit"
+  [bar]="selectedBar"
+  (close)="visibleEdit = false; selectedBar = null"
+  (barUpdated)="onBarUpdated($event)"
+  (barDeleted)="onBarDeleted($event)"
+></app-bar-edit-model>

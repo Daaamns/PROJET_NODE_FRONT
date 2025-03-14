@@ -8,20 +8,25 @@
   </ng-template>
   <ng-template #title> {{ bars.nom }} </ng-template>
   <ng-template #subtitle> {{ bars.adresse }} </ng-template>
-  <p>
+  <p class="card-description">
     {{ bars.description }}
   </p>
   <ng-template #footer>
-    <div class="flex gap-4 mt-1">
+    <div class="btn-card">
       <p-button
-        label="Cancel"
+        label="Voir Bieres"
         severity="secondary"
         class="w-full"
         [outlined]="true"
         styleClass="w-full"
       />
       <p-button
-        label="voir +"
+        label="Modifier Bar"
+        class="w-full"
+        (click)="edit.emit(bars.id)"
+      />
+      <p-button
+        label="Voir Commandes"
         class="w-full"
         styleClass="w-full"
         [routerLink]="['command/', bars.id]"

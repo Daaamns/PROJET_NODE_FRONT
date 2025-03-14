@@ -35,5 +35,14 @@ h2 {
 
 .select-btn {
   display: flex;
-  gap: 50px;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.select-modal {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
 }
