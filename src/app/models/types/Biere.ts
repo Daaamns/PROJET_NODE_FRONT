@@ -1,6 +1,6 @@
 export type Biere = {
     id: number;
-    nom: string;
+    name: string;
     description: string;
     degree: number;
     prix: number;

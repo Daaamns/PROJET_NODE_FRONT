@@ -7,20 +7,14 @@ import { Biere } from '../models/types/Biere';
   providedIn: 'root',
 })
 export class BiereService {
-  private bar_id!: number;
   private http = inject(HttpClient);
   constructor() {}
-
-  getBieres(): Observable<Biere[]> {
-    return this.http.get<Biere[]>(
-      'http://localhost:3000/bars/' + this.bar_id + '/biere/'
-    );
+  
+  getBieres(bar_id: number): Observable<Biere[]> {
+      return this.http.get<Biere[]>('http://localhost:3000/bars/'+ bar_id +'/biere/');
   }
-  addBiere(biere: Biere): Observable<Biere> {
-    return this.http.post<Biere>(
-      'http://localhost:3000/bars/' + this.bar_id + '/biere/',
-      biere
-    );
+  addBiere(bar_id: number, biere: Biere): Observable<Biere> {
+    return this.http.post<Biere>('http://localhost:3000/bars/'+ bar_id + '/biere/', biere);
   }
   updateBiere(biere: Biere): Observable<Biere> {
     return this.http.put<Biere>(
