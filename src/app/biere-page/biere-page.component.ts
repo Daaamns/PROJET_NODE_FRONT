@@ -5,18 +5,23 @@ import { BarService } from '../services/bar.service';
 import { BiereService } from '../services/biere.service';
 import { Biere } from '../models/types/Biere';
 import { NgFor } from '@angular/common';
+import { NgForm, FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-biere-panel',
-  imports: [NgFor],
-  templateUrl: './biere-panel.component.html',
-  styleUrl: './biere-panel.component.scss'
+  selector: 'app-biere-page',
+  standalone: true,
+  imports: [NgFor, FormsModule],
+  templateUrl: './biere-page.component.html',
+  styleUrl: './biere-page.component.scss'
 })
-export class BierePanelComponent {
+export class BierePageComponent {
+onSubmit(_t12: any) {
+throw new Error('Method not implemented.');
+}
   id!: number;
   bar!: Bar;
   private biereService: BiereService = new BiereService()
-  beers!: Biere[]
+  beers: Biere[] = []
 
   constructor(private route: ActivatedRoute, private barService: BarService) {}
 
@@ -30,8 +35,9 @@ export class BierePanelComponent {
       this.bar = data;
       console.log(this.bar);
     });
-    this.biereService.getBieres(this.id).forEach(item => {
-      this.beers = item;
+    this.biereService.getBieres(this.id).subscribe((data) =>{
+      this.beers = data;
+      console.log(data);
     });
   }
 
