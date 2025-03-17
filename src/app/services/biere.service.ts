@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { Biere } from '../models/types/Biere';
 
 @Injectable({
@@ -9,6 +9,10 @@ import { Biere } from '../models/types/Biere';
 export class BiereService {
   private http = inject(HttpClient);
   constructor() {}
+
+  handleFailure(err: HttpErrorResponse): void {
+      throw 'Connection to DB failure: ' + err.message;
+  }
   
   getBieres(bar_id: number): Observable<Biere[]> {
       return this.http.get<Biere[]>('http://localhost:3000/bars/'+ bar_id +'/biere/');
@@ -22,7 +26,11 @@ export class BiereService {
       biere
     );
   }
-  deleteBiere(biere: Biere): void {
-    this.http.delete<Biere>('http://localhost:3000/biere/' + biere.id);
+  deleteBiere(biere: Biere): Observable<void> {
+    return this.http.delete<void>('http://localhost:3000/biere/' + biere.id).pipe(
+      catchError((err) => {
+              throw this.handleFailure(err);
+      })
+    );
   }
 }
