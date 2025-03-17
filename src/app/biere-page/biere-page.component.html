@@ -115,16 +115,16 @@
 
 <form [formGroup]="biereForm" (ngSubmit)="onAddSubmit()">
     <div>
-        <label for="name">Nom</label><input type="text" id="name" formControlName="name">
+        <label for="name">Nom</label><input type="text" id="name" formControlName="name"><br>
     </div>
     <div>
-        <label for="description">Description</label><input type="text" id="description" formControlName="description">
+        <label for="description">Description</label><input type="text" id="description" formControlName="description"><br>
     </div>
     <div>
-        <label for="degree">Degree</label><input type="number" id="degree" formControlName="degree">
+        <label for="degree">Degree</label><input type="number" id="degree" formControlName="degree"><br>
     </div>
     <div>
-        <label for="prix">prix</label><input type="number" id="prix" formControlName="prix">
+        <label for="prix">prix</label><input type="number" id="prix" formControlName="prix"><br>
     </div>
     <input id="bar_id" type="hidden" formControlName="bar_id" value="{{id}}">
     <button type="submit">Envoyer</button>

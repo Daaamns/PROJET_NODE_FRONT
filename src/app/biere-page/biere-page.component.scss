@@ -37,4 +37,7 @@
     display: flex;
     gap: 50px;
   }
-  
+  form>div>label {
+    display:inline-block;
+    width:100px;
+  }
