@@ -56,4 +56,24 @@ export class BarService {
       })
     );
   }
+
+  getBarsByCity(city: string): Observable<Bar[]> {
+    return this.http
+      .get<Bar[]>(`${this.apiUrl}bars/ville`, { params: { ville: city } })
+      .pipe(
+        catchError((err) => {
+          throw this.handleFailure(err);
+        })
+      );
+  }
+
+  getBarsByName(name: string): Observable<Bar[]> {
+    return this.http
+      .get<Bar[]>(`${this.apiUrl}bars/name`, { params: { name } })
+      .pipe(
+        catchError((err) => {
+          throw this.handleFailure(err);
+        })
+      );
+  }
 }

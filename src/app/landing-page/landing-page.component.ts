@@ -3,9 +3,10 @@ import { Component, inject } from '@angular/core';
 import { Bar } from '../models/types/Bar';
 import { BarService } from '../services/bar.service';
 import { CardComponent } from './components/bar-card/card.component';
-import { BarEditModelComponent } from './components/bar-edit-model/bar-edit-model.component';
 import { ButtonModule } from 'primeng/button';
-import { BarAddModelComponent } from './components/bar-add-model/bar-add-model.component';
+import { FormsModule } from '@angular/forms';
+import { BarEditModelComponent } from './components/modals/bar-edit-model/bar-edit-model.component';
+import { BarAddModelComponent } from './components/modals/bar-add-model/bar-add-model.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,16 +17,20 @@ import { BarAddModelComponent } from './components/bar-add-model/bar-add-model.c
     CardComponent,
     ButtonModule,
     BarAddModelComponent,
+    FormsModule,
   ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
 export class LandingPageComponent {
   bars: Bar[] = [];
+  allBars: Bar[] = [];
   private barService = inject(BarService);
   selectedBar!: Bar | null;
   visibleEdit: boolean = false;
   visibleAdd: boolean = false;
+  searchCity: string = '';
+  searchName: string = '';
 
   ngOnInit(): void {
     this.loadData();
@@ -34,18 +39,46 @@ export class LandingPageComponent {
   loadData(): void {
     this.barService.getBars().subscribe((data) => {
       this.bars = data;
+      this.allBars = data;
     });
   }
 
+  filterByCity(): void {
+    if (!this.searchCity.trim()) {
+      return;
+    }
+
+    this.barService.getBarsByCity(this.searchCity).subscribe((data) => {
+      if (data.length === 0) {
+        this.loadData();
+      } else {
+        this.bars = data;
+      }
+    });
+  }
+
+  filterByName(): void {
+    if (!this.searchName.trim()) {
+      return;
+    }
+
+    this.barService.getBarsByName(this.searchName).subscribe((data) => {
+      if (data.length === 0) {
+        this.loadData();
+      } else {
+        this.bars = data;
+      }
+    });
+  }
+
+  resetFilters(): void {
+    this.bars = [...this.allBars];
+    this.searchCity = '';
+    this.searchName = '';
+  }
+
   editBar(id: number): void {
-    this.selectedBar = this.bars.find((bar) => bar.id === id) || {
-      id: 0,
-      nom: '',
-      adresse: '',
-      tel: 0,
-      email: '',
-      description: '',
-    };
+    this.selectedBar = this.bars.find((bar) => bar.id === id) || null;
     this.visibleEdit = true;
   }
 
