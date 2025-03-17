@@ -1,10 +1,22 @@
-<div class="add-bar-btn">
-  <p-button
-    class="btn-"
-    label="Ajouter un Bar"
-    severity="secondary"
-    (click)="addBar()"
+<div class="filter-container">
+  <input
+    type="text"
+    [(ngModel)]="searchCity"
+    placeholder="Rechercher par ville"
   />
+  <p-button (click)="filterByCity()">Filtrer</p-button>
+
+  <input
+    type="text"
+    [(ngModel)]="searchName"
+    placeholder="Rechercher par nom"
+  />
+  <p-button (click)="filterByName()">Filtrer</p-button>
+
+  <p-button class="reset" (click)="resetFilters()">Réinitialiser</p-button>
+  <div class="add-bar-btn">
+    <p-button class="btn-" label="Ajouter un Bar +" (click)="addBar()" />
+  </div>
 </div>
 
 <app-bar-add-model

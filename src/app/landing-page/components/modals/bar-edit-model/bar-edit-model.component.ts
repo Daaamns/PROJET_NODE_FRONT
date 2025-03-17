@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Bar } from '../../../models/types/Bar';
-import { BarService } from '../../../services/bar.service';
+import { Bar } from '../../../../models/types/Bar';
+import { BarService } from '../../../../services/bar.service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
