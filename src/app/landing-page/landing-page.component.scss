@@ -4,4 +4,40 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 25px;
+  padding: 20px;
+}
+.add-bar-btn {
+  display: flex;
+  justify-content: center;
+
+  .btn- {
+    margin-left: 40px;
+    --p-button-primary-background: rgb(18, 34, 77);
+    --p-button-primary-border-color: rgb(18, 34, 77);
+    --p-button-primary-hover-border-color: rgb(43, 69, 141);
+    --p-button-primary-hover-background: rgb(43, 69, 141);
+  }
+}
+
+p-button {
+  margin-left: 5px;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+
+  input {
+    margin-left: 10px;
+    height: 35px;
+    border-radius: 5px;
+  }
+  .reset {
+    --p-button-primary-background: black;
+    --p-button-primary-border-color: black;
+    --p-button-primary-hover-border-color: rgb(50, 49, 49);
+    --p-button-primary-hover-background: rgb(50, 49, 49);
+  }
 }

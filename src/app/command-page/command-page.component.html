@@ -31,6 +31,8 @@
           <th>Prix</th>
           <th>Date</th>
           <th>Statut</th>
+          <th>Modifier</th>
+          <th>Supprimer</th>
         </tr>
       </ng-template>
       <ng-template #body let-commande>
@@ -41,14 +43,14 @@
           <td>{{ commande.status }}</td>
           <td>
             <p-button
-              icon="pi pi-pencil"
+              class="btn-td"
               label="Modifier"
               (click)="openEditDialog(commande)"
             />
           </td>
           <td>
             <p-button
-              icon="pi pi-trash"
+              class="btn-td"
               label="Supprimer"
               severity="danger"
               (click)="openDeleteDialog(commande)"
@@ -67,8 +69,9 @@
   [style]="{ width: '30rem', minHeight: '12rem' }"
 >
   <div class="select-btn" *ngIf="selectedCommande">
-    <label for="status" class="font-semibold w-24">Statut</label>
+    <label for="status">Statut</label>
     <p-selectButton
+      class="select-modal"
       [options]="[
         { label: 'Brouillon', value: 'Brouillon' },
         { label: 'En cours', value: 'En cours' },
@@ -76,11 +79,11 @@
       ]"
       [(ngModel)]="selectedCommande.status"
       optionLabel="label"
-      [style]="{ width: '100%' }"
+      [style]="{ width: '100%',}"
     ></p-selectButton>
   </div>
 
-  <div class="flex justify-end gap-2">
+  <div class="btn-modal">
     <p-button
       label="Annuler"
       severity="secondary"
